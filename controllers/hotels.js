@@ -1,4 +1,5 @@
 const { HotelModel } = require("../models/Hotels")
+const jwt=require("jsonwebtoken")
 
 const createHotel = async (req, res, next) => {
     const newHotel = new HotelModel(req.body)
