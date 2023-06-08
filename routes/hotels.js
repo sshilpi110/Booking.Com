@@ -1,17 +1,18 @@
-const { createHotel,updateHotel, deleteHotel,hotel,hotels } = require("../controllers/hotels")
+const { createHotel, updateHotel, deleteHotel, hotel, hotels } = require("../controllers/hotels")
+const {verifyAdmin}=require("../utils/verifyToken")
 const express = require("express")
 
 const hotelRoutes = express.Router()
 
-hotelRoutes.post("/", createHotel)
+hotelRoutes.post("/", verifyAdmin, createHotel)
 
-hotelRoutes.put("/:id",updateHotel)
+hotelRoutes.put("/:id", verifyAdmin, updateHotel)
 
-hotelRoutes.delete("/:id", deleteHotel)
+hotelRoutes.delete("/:id", verifyAdmin, deleteHotel)
 
-hotelRoutes.get("/:id",hotel)
+hotelRoutes.get("/:id", hotel)
 
-hotelRoutes.get("/",hotels)
+hotelRoutes.get("/", hotels)
 
 module.exports = {
     hotelRoutes

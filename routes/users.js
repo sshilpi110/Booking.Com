@@ -1,6 +1,6 @@
 const express = require("express")
 const { updateUser, deleteUser, User, Users } = require("../controllers/users")
-const { verifyToken, verifyUser } = require("../utils/verifyToken")
+const { verifyToken, verifyUser, verifyAdmin } = require("../utils/verifyToken")
 
 
 const userRoutes = express.Router()
@@ -13,13 +13,17 @@ userRoutes.get("/checkuser/:id", verifyUser, (req, res, next) => {
     res.send("Hello user , You are logged in  & you can delete your account")
 })
 
-userRoutes.put("/:id", updateUser)
+userRoutes.get("/checkadmin/:id", verifyAdmin, (req, res, next) => {
+    res.send("Hello admin , You are logged in  & you can delete all accounts")
+})
 
-userRoutes.delete("/:id", deleteUser)
+userRoutes.put("/:id", verifyUser, updateUser)
 
-userRoutes.get("/:id", User)
+userRoutes.delete("/:id", verifyUser, deleteUser)
 
-userRoutes.get("/", Users)
+userRoutes.get("/:id", verifyUser, User)
+
+userRoutes.get("/", verifyAdmin, Users)
 
 
 
