@@ -5,7 +5,7 @@ const { verifyToken, verifyUser, verifyAdmin } = require("../utils/verifyToken")
 
 const userRoutes = express.Router()
 
-userRoutes.get("/checkauthentication", verifyToken, (req, res, next) => {
+userRoutes.get("/checkauthenticationm", verifyToken, (req, res, next) => {
     res.send("Hello user , You are logged in !")
 })
 
